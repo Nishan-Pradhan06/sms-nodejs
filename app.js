@@ -10,8 +10,9 @@ app.use(express.urlencoded({ extended: true }));
 
 
 //rendering the pages 
-app.get("/", (req, res) => {
-    res.render("index")
+app.get("/", async(req, res) => {
+    const allstudentlists = await studentlists.findAll()
+    res.render("index",{studentcount:allstudentlists.length })
 })
 app.get("/createStudent", async (req, res) => {
     res.render("form")
@@ -20,7 +21,7 @@ app.get("/createStudent", async (req, res) => {
 app.get("/viewStudent", async (req, res) => {
     const allstudentlists = await studentlists.findAll() //find the data from sql and display in front end
     // console.log(allstudentlists)
-    res.render("table", { studentlists: allstudentlists })// creating variable studentlists which store all the data found from database and pssing to to frontend
+    res.render("table", { studentlists: allstudentlists})// creating variable studentlists which store all the data found from database and pssing to to frontend
 })
 
 //create  to database 
@@ -65,25 +66,9 @@ app.get("/editdata/:id", async (req, res) => {
     res.render("edit", { value: editstudentlists })
 })
 //edit api
-// app.post("/editdata", async (req, res) => {
-//     const name = req.body.name
-//     const address = req.body.address
-//     const contact = req.body.contact
-//     const bloodGroup = req.body.bloodgroup
-//     await studentlists.update( {
-//         name : name ,
-//         address : address ,
-//         contact : contact ,
-//         bloodgroup : bloodGroup,
-//         where: {
-//             id: id
-//         }
-//     })
-//     res.redirect("/viewStudent")
-// })
 app.post("/editdata/:id", async(req, res) => {
     const id = req.params.id
-    console.log(req.body)
+    // console.log(req.body)
     const { name, address, contact, bloodgroup } = req.body;
     await studentlists.update({
         name: name,
