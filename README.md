@@ -1,5 +1,5 @@
 # sms-nodejs
-student-management-system
+student-management-system<br>
 auto count the total number of student
 ![Screenshot (437)](https://github.com/Nishan-Pradhan06/sms-nodejs/assets/105001135/fbb20282-7409-45af-a4ff-4c93db06b8cd)
 
