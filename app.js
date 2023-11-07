@@ -23,7 +23,6 @@ app.get("/viewStudent", async (req, res) => {
     // console.log(allstudentlists)
     res.render("table", { studentlists: allstudentlists})// creating variable studentlists which store all the data found from database and pssing to to frontend
 })
-
 //create  to database 
 app.post("/createStudent", async (req, res) => {
     const name = req.body.name
